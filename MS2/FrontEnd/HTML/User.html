@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Details</title>
+    <link rel="stylesheet" href="../CSS/User.css">
+    <link rel="icon" href="../Images/logo.png">
+
+</head>
+
+<body>
+    <!-- <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li class="dropdown">
+            <a href="UserRental.html" class="dropbtn">Rental History</a>
+            <div class="dropdown-content">
+                <a href="User_Pending.html">Pending</a>
+                <a href="User_Returned.html">Returned</a>
+            </div>
+        </li>
+        <li><a href="update_User.html">Settings</a></li>
+        <li><a href="Login.html">Logout</a></li>
+    </ul> -->
+
+
+     
+    <div class="myNavv">
+        <div class="logo">
+            GG BIKE RENTING
+        </div>
+        <div class="myNav">
+            <!-- <a href="../HTML/home.html">Home</a> -->
+            <a href="../HTML/update_User.html">Update User</a>
+            <a href="../HTML/User.html" style="text-decoration: underline; color: orangered;">User</a>
+            <a href="../HTML/User_Pending.html">User Pending</a>
+            <a href="../HTML/User_Returned.html">User Returned</a>
+            <a href="../HTML/Userview.html">User View</a>
+            <a href="../HTML/home.html">Log Out</a>
+        
+        </div>
+    </div>
+
+    
+
+
+    <div id="search" class="searchBike">
+        <input type="search" placeholder="Model" id="search_model">
+        <input type="search" placeholder="Brand" id="search_brand">
+        <label>Rent</label>
+
+        <input type="search" placeholder="Rent" id="Rent">
+        <div id="Range"></div>
+        <button id="search_btn" onclick="searchBike()">Search</button>
+    </div>
+
+   <div id="bike_details">
+        <!-- <div class="bikes">
+            <div class="gallery">
+                <img src="${imageSrc}" alt="Bike 1" loading="lazy" >
+            </div>
+            <div class="details">
+                <h1>${bike.model}</h1>
+                <h2>${bike.brand}</h2>
+
+                <p style="color: black;">Bike Reg No : <span> ${bike.registrationNumber}</span></p>
+                <p style="color: black;">Bike Rent Price : <span> ${bike.rent}</span></p>
+                <p style="text-align: center; color: gray;">Renting a motorbike offers several advantages for travelers
+                    and locals alike. It provides a cost-effective way to explore destinations at your own pace,
+                    allowing for flexibility in itinerary and spontaneity. Motorbikes are often more fuel-efficient than
+                    cars, making them an eco-friendly option. They also enable easier navigation through traffic and
+                    access to narrow roads or off-the-beaten-path locations that larger vehicles can’t reach.
+                    Additionally, renting a motorbike can enhance the overall experience, allowing riders to fully
+                    immerse themselves in the sights, sounds, and culture of their surroundings..</p>
+
+                <div class="hourRent">
+                    <button class="rentBtn" onclick="viewBike(${bike.bikeId})">View</button>
+                </div>
+
+            </div>
+
+        </div> -->
+
+    </div>
+
+
+
+    <footer>
+        <p>All Rights Reserved.Copyrights &copy; GG_Store 2024.</p>
+    </footer>
+
+
+    <script src="../Js/User.js"></script>
+</body>
+
+</html>
