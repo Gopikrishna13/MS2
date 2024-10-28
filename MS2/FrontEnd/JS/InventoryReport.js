@@ -26,8 +26,8 @@ function populateTable(data) {
                 <td>${item.brand}</td>
                 <td>${item.model}</td>
                 <td>${item.registrationNumber}</td>
-                <td>${item.rentedDate)</td>
-                <td>${item.returnDate)</td>
+                <td>${item.rentedDate})</td>
+                <td>${item.returnDate})</td>
                 <td>${item.status}</td>
             </tr>
         `;
