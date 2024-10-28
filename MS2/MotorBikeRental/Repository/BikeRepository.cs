@@ -247,49 +247,44 @@ public async  Task <bool> UpdateBike(int BikeId,BikeRequestDTO bikeRequest)
 }
 
 
-  public async Task<bool> DeleteBike(string regNo)
+public async Task<bool> DeleteBike(string regNo)
 {
-    var chkBikeQuery = @"SELECT COUNT(1) FROM ReturnedBikes WHERE RegistrationNumber = @No AND Status=@status" ;
+    var chkRentalRequestQuery = @"SELECT COUNT(1) FROM RentalRequest WHERE BikeId = (SELECT BikeId FROM BikeUnits WHERE RegistrationNumber = @regNo)";
     var deleteBikeQuery = @"DELETE FROM Bikes WHERE BikeId = @Id";
-    var deleteBikeUnitQuery=@"Delete from BikeUnits where RegistrationNumber=@regNo ";
-    var deleteBikeImageQuery=@"Delete from BikeImages where UnitId=@UId";
-    var findunitId=@"SELECT UnitId from BikeUnits where RegistrationNumber=@regNo";
-    var verifyBikeId=@"SELECT BikeId from BikeUnits where RgistrationNumber=@regNo";
-    var chkBike=@"Select count(1) from BikeUnits where BikeId=@bikeid";
-
+    var deleteBikeUnitQuery = @"DELETE FROM BikeUnits WHERE RegistrationNumber = @regNo";
+    var deleteBikeImageQuery = @"DELETE FROM BikeImages WHERE UnitId = @UId";
+    var findUnitId = @"SELECT UnitId FROM BikeUnits WHERE RegistrationNumber = @regNo";
+    var verifyBikeId = @"SELECT BikeId FROM BikeUnits WHERE RegistrationNumber = @regNo";
+    var chkBike = @"SELECT COUNT(1) FROM BikeUnits WHERE BikeId = @bikeid"; 
     using (var connection = new SqlConnection(_connectionString))
     {
-       
-        var rentalCount = await connection.ExecuteScalarAsync<int>(chkBikeQuery, new {No=regNo,status="Pending" });
-        var unitId=await connection.ExecuteScalarAsync<int>(findunitId,new{regNo=regNo});
-        
-        if (rentalCount > 0)
+        var rentalRequestCount = await connection.ExecuteScalarAsync<int>(chkRentalRequestQuery, new { regNo });
+
+        if (rentalRequestCount > 0)
         {
-         
-            return false;
+            return false; 
         }
 
-      
-      var remainingBikeId=await connection.ExecuteScalarAsync<int>(verifyBikeId,new{regNo=regNo});
-         await connection.ExecuteAsync(deleteBikeImageQuery,new{UId=unitId});
-         await connection.ExecuteAsync(deleteBikeUnitQuery,new{regNo=regNo});
-        var delbike=await connection.ExecuteScalarAsync<int>(chkBike,new{bikeid=remainingBikeId});
-         if(delbike==0)
-         {
-                 var deletedRows=await connection.ExecuteAsync(deleteBikeQuery, new { Id=remainingBikeId  });
-                 return deletedRows >0 ;
-         }else{
-    
-               return true;
-         }
- 
-    
-        
-      
-       // return deletedRows > 0;
-       return true;
+        var unitId = await connection.ExecuteScalarAsync<int>(findUnitId, new { regNo });
+        await connection.ExecuteAsync(deleteBikeImageQuery, new { UId = unitId });
+        await connection.ExecuteAsync(deleteBikeUnitQuery, new { regNo });
+
+        var remainingBikeId = await connection.ExecuteScalarAsync<int>(verifyBikeId, new { regNo });
+        var delbike = await connection.ExecuteScalarAsync<int>(chkBike, new { bikeid = remainingBikeId });
+
+        if (delbike == 0)
+        {
+            var deletedRows = await connection.ExecuteAsync(deleteBikeQuery, new { Id = remainingBikeId });
+            return deletedRows > 0;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
+
+
 
 
 public async  Task <int> BikesCount()
