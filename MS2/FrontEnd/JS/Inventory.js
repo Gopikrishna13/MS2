@@ -190,32 +190,32 @@ function getBase64(file) {
 }
 
 
-function deleteData(id) {
-    // let existingBikes = JSON.parse(localStorage.getItem("Bike_Details")) || [];
+function deleteData(regNo) {
+    // Let existingBikes = JSON.parse(localStorage.getItem("Bike_Details")) || [];
     // existingBikes = existingBikes.filter(bike => bike.ID !== id);
     // localStorage.setItem("Bike_Details", JSON.stringify(existingBikes));
-    const apiDeleteUrl = `http://localhost:5156/api/Bike/DeleteBike?Id=${parseInt(id)}`;
 
-fetch(apiDeleteUrl,{
-    method:'DELETE',
-    headers:{'Content-Type':'application/json'}
-}).then (response=>{
-    if(!response.ok)
-    {
-        throw new Error('response not ok');
-    }
-    return response.text();
-}).then(data=>{
-    alert("Bike deleted successfully!");
-    console.log(data);
-    location.reload();
-    //displayBikes();
-}).catch(error=>{
-    console.error(error);
-})
+    const apiDeleteUrl = `http://localhost:5156/api/Bike/DeleteBike?regNo=${regNo}`; // Changed to use regNo
 
-    
+    fetch(apiDeleteUrl, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Response not ok');
+        }
+        return response.text();
+    }).then(data => {
+        alert("Bike deleted successfully!");
+        console.log(data);
+        location.reload(); // Reload the page to refresh the bike list
+        // displayBikes(); // Uncomment if you want to call displayBikes function after deletion
+    }).catch(error => {
+        console.error(error);
+    });
 }
+
+
 
 function updateData(id) {
     console.log("Update button clicked for ID:", id);
