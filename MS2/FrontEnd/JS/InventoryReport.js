@@ -26,6 +26,8 @@ function populateTable(data) {
                 <td>${item.brand}</td>
                 <td>${item.model}</td>
                 <td>${item.registrationNumber}</td>
+                <td>${item.rentdDate)</td>
+                <td>${item.to)</td>
                 <td>${item.status}</td>
             </tr>
         `;
