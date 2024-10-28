@@ -34,6 +34,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+function calculateHoursDifference(startDateString, endDateString) {
+    const startDate = new Date(startDateString);
+    const endDate = new Date(endDateString);
+    const millisecondsPerHour = 1000 * 60 * 60;
+    const differenceInMilliseconds = endDate - startDate;
+    const differenceInHours = Math.floor(differenceInMilliseconds / millisecondsPerHour);
+    return differenceInHours;
+}
+
 // Function to display pending rental requests in a table
 function displayPendingRequests(requests) {
     let table = `
@@ -54,7 +63,7 @@ function displayPendingRequests(requests) {
             <td>${request.registrationNumber}</td>
             <td>${request.rentedDate}</td>
             <td>${request.to}</td>
-            <td>${request.due}</td>
+            <td>${calculateHoursDifference(request.rentedDate,request.to)}</td>
            
            
         </tr>`;
@@ -63,6 +72,7 @@ function displayPendingRequests(requests) {
     table += `</table>`;
     document.getElementById("table").innerHTML = table;
 }
+
 
 // Function to handle action on a request
 function handleRequestAction(requestId) {
