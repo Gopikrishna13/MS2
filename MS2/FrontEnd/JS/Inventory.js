@@ -304,7 +304,7 @@ fetch(apiUrl)
                     <td>${data.rent}</td>
                     <td> 
                         <button id="upd_btn" onclick="updateData(${data.bikeId})">Update</button>
-                        <button id="dlt_btn" onclick="deleteData(${data.bikeId})">Delete</button>
+                        <button id="dlt_btn" onclick="deleteData(${data.registrationNumber})">Delete</button>
                     </td>
                 </tr>`;
             }
