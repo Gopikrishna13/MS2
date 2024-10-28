@@ -32,28 +32,33 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // Function to display pending rental requests in a table
+function calculateHoursDifference(startDateString, endDateString) {
+    const startDate = new Date(startDateString);
+    const endDate = new Date(endDateString);
+    const millisecondsPerHour = 1000 * 60 * 60;
+    const differenceInMilliseconds = endDate - startDate;
+    const differenceInHours = Math.floor(differenceInMilliseconds / millisecondsPerHour);
+    return differenceInHours;
+}
+
+
 function displayPendingRequests(requests) {
     let table = `
     <table>
         <tr>
-            
             <th>RegistrationNumber</th>
-            <th>From </th>
-             <th>To </th>
+            <th>From</th>
+            <th>To</th>
             <th>Due</th>
-          
         </tr>`;
 
     for (const request of requests) {
         table += `
         <tr>
-            
             <td>${request.registrationNumber}</td>
             <td>${request.rentedDate}</td>
             <td>${request.to}</td>
-            <td>${request.due}</td>
-           
-           
+            <td>${calculateHoursDifference(request.rentedDate,request.to)}</td>
         </tr>`;
     }
 
