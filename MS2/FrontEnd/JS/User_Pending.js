@@ -34,9 +34,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Function to display pending rental requests in a table
 function calculateHoursDifference(startDateString, endDateString) {
     const startDate = new Date(startDateString);
+    const today=new Date();
     const endDate = new Date(endDateString);
     const millisecondsPerHour = 1000 * 60 * 60;
-    const differenceInMilliseconds = endDate - startDate;
+    const differenceInMilliseconds = endDate - today;
     const differenceInHours = Math.floor(differenceInMilliseconds / millisecondsPerHour);
     return differenceInHours;
 }
