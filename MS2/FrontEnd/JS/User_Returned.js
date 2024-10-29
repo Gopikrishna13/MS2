@@ -37,8 +37,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 function calculateHoursDifference(startDateString, endDateString) {
     const startDate = new Date(startDateString);
     const endDate = new Date(endDateString);
+    const today=new Date();
     const millisecondsPerHour = 1000 * 60 * 60;
-    const differenceInMilliseconds = endDate - startDate;
+    const differenceInMilliseconds = endDate - today;
     const differenceInHours = Math.floor(differenceInMilliseconds / millisecondsPerHour);
     return differenceInHours;
 }
